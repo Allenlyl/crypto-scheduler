@@ -1,0 +1,13 @@
+package com.allenlyl.cryptoscheduler;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class CryptoschedulerApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
