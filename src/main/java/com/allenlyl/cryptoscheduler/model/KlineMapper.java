@@ -2,7 +2,9 @@ package com.allenlyl.cryptoscheduler.model;
 
 import com.allenlyl.cryptoscheduler.repository.Kline;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -18,7 +20,7 @@ public interface KlineMapper {
            "WHERE",
            "symbol = #{symbol} and open_time >= #{startTime} and close_time <= #{endTime}"
    })
-   List<Kline> getDataByRange(String symbol, Long startTime, Long endTime);
+   List<Kline> getDataByRange(@NotNull String symbol, @NotNull @Min(0) Long startTime, @NotNull @Min(0) Long endTime);
 
    @Insert({
            "<script>",
@@ -31,12 +33,11 @@ public interface KlineMapper {
    })
    int insertBatch(@NotEmpty List<@Valid Kline> klineList);
 
+   // TODO delete it
    @Select("SELECT * FROM klinedata")
    List<Kline> getAll();
 
-   @Select("SELECT * FROM klinedata where open_time >= #{startTime} and close_time <= #{endTime}")
-   List<Kline> getData(String symbol, Long startTime, Long endTime);
-
+   // TODO delete it
    @Update(("TRUNCATE TABLE klinedata"))
    void truncateAll();
 }

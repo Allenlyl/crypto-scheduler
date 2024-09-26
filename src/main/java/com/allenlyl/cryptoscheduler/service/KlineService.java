@@ -58,7 +58,7 @@ public class KlineService {
    }
 
    public List<Kline> getData(String symbol, int interval, Long startTime, Long endTime) {
-      List<Kline> klineList = klineMapper.getData(symbol, startTime, endTime);
+      List<Kline> klineList = klineMapper.getDataByRange(symbol, startTime, endTime);
       combined(klineList, interval);
       return klineList;
    }
@@ -99,10 +99,12 @@ public class KlineService {
       }
    }
 
+   // TODO delete it
    public List<Kline> getAll() {
       return klineMapper.getAll();
    }
 
+   // TODO delete it
    public void deleteAll() {
       klineMapper.truncateAll();
    }

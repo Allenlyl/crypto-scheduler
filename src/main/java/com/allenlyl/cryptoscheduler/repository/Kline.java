@@ -13,14 +13,14 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class Kline {
    private @NotNull @Min(0) Long openTime;
-   private Double openPrice;
-   private Double highPrice;
-   private Double lowPrice;
-   private Double closePrice;
-   private Double volume;
-   private Long closeTime;
-   private Integer tradeNumber;
-   private String symbol;
+   private @NotNull @Min(0) Double openPrice;
+   private @NotNull @Min(0) Double highPrice;
+   private @NotNull @Min(0) Double lowPrice;
+   private @NotNull @Min(0) Double closePrice;
+   private @NotNull @Min(0) Double volume;
+   private @NotNull @Min(0) Long closeTime;
+   private @NotNull @Min(0) Integer tradeNumber;
+   private @NotNull String symbol;
 
    public Kline(String[] klineData, String symbol) {
       this.openTime = Long.parseLong(klineData[0]);
