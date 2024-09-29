@@ -59,11 +59,22 @@ public class KlineService {
 
    public List<Kline> getData(String symbol, int interval, Long startTime, Long endTime) {
       List<Kline> klineList = klineMapper.getDataByRange(symbol, startTime, endTime);
+//      List<Kline> klineList = new ArrayList<>();
       combined(klineList, interval);
       return klineList;
    }
 
    private void combined(List<Kline> klineList, int interval){
+      // for loop i = 0, i < size; i+= interval
+      // klinelist.sublist(i, i+interval?size-1)
+      // another function klineList, start, end
+      // for start, end, i ++
+      // kline.setOpenPrice(klineList.get(start).getOpenPrice());
+      //         kline.setCloseTime(klineList.get(end).getCloseTime());
+      //         kline.setOpenPrice(klineList.get(start).getOpenPrice());
+      //         kline.setClosePrice(klineList.get(end).getClosePrice());
+      // return kline
+
       int start = 0;
       while (start < klineList.size()) {
          double volume = 0;
@@ -75,7 +86,7 @@ public class KlineService {
 
          kline.setOpenPrice(klineList.get(start).getOpenPrice());
          kline.setCloseTime(klineList.get(end).getCloseTime());
-         kline.setOpenPrice(klineList.get(start).getOpenPrice());
+         kline.setOpenTime(klineList.get(start).getOpenTime());
          kline.setClosePrice(klineList.get(end).getClosePrice());
 
          for(int i = start; i <= end; i++){

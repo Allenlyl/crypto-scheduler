@@ -4,6 +4,26 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+!.mvn/wrapper/maven-wrapper.properties
+!.mvn/wrapper/maven-wrapper.log
+
+# Ensure the wrapper scripts are tracked
+!mvnw
+!mvnw.cmd
+
+
+Copy code
+# macOS system files
+.DS_Store
+
+# Maven files
+.mvn/
+
+# Sensitive files
+crypto-scheduler.pem
+ec2-user@ec2-54-183-184-194.us-west-1.compute.amazonaws.com
+
+
 ### STS ###
 .apt_generated
 .classpath

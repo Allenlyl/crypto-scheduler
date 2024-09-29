@@ -9,13 +9,14 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
 @Mapper
+@Validated
 public interface KlineMapper {
    @Select({
-           "<script>",
            "SELECT * FROM klinedata",
            "WHERE",
            "symbol = #{symbol} and open_time >= #{startTime} and close_time <= #{endTime}"
@@ -23,15 +24,13 @@ public interface KlineMapper {
    List<Kline> getDataByRange(@NotNull String symbol, @NotNull @Min(0) Long startTime, @NotNull @Min(0) Long endTime);
 
    @Insert({
-           "<script>",
            "INSERT INTO klinedata(open_time, open_price, high_price, low_price, close_price, volume, close_time, trade_number, symbol)" +
-           "values ",
+                   "values ",
            "<foreach  collection='klineList' item='kline' separator=','>",
            "(#{kline.openTime}, #{kline.openPrice}, #{kline.highPrice}, #{kline.lowPrice}, #{kline.closePrice}, #{kline.volume}, #{kline.closeTime}, #{kline.tradeNumber}, #{kline.symbol})",
-           "</foreach>",
-           "</script>"
+           "</foreach>"
    })
-   int insertBatch(@NotEmpty List<@Valid Kline> klineList);
+   void insertBatch(@NotEmpty List<@Valid Kline> klineList);
 
    // TODO delete it
    @Select("SELECT * FROM klinedata")
